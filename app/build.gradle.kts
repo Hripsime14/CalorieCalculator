@@ -28,11 +28,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_18
-        targetCompatibility = JavaVersion.VERSION_18
+        sourceCompatibility = JavaVersion.VERSION_19
+        targetCompatibility = JavaVersion.VERSION_19
     }
     kotlinOptions {
-        jvmTarget = "18"
+        jvmTarget = "19"
     }
     buildFeatures {
         compose = true
@@ -61,14 +61,6 @@ dependencies {
     implementation(DaggerHilt.hiltAndroid)
     kapt(DaggerHilt.hiltCompiler)
 
-    implementation(project(Modules.core))
-    implementation(project(Modules.coreUi))
-    implementation(project(Modules.onboardingPresentation))
-    implementation(project(Modules.onboardingDomain))
-    implementation(project(Modules.trackerPresentation))
-    implementation(project(Modules.trackerDomain))
-    implementation(project(Modules.trackerData))
-
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
 
@@ -84,6 +76,14 @@ dependencies {
     kapt(Room.roomCompiler)
     implementation(Room.roomKtx)
     implementation(Room.roomRuntime)
+
+    implementation(project(Modules.core))
+    implementation(project(Modules.coreUi))
+    implementation(project(Modules.onboardingPresentation))
+    implementation(project(Modules.onboardingDomain))
+    implementation(project(Modules.trackerPresentation))
+    implementation(project(Modules.trackerDomain))
+    implementation(project(Modules.trackerData))
 
     testImplementation(Testing.junit4)
     testImplementation(Testing.junitAndroidExt)
