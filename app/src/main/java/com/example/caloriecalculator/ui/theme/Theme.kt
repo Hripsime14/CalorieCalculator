@@ -5,7 +5,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
+import com.example.core_ui.dimesion.Dimensions
+import com.example.core_ui.dimesion.LocalSpacing
 
 private val DarkColorPalette = darkColorScheme(
     primary = BrightGreen,
@@ -38,10 +41,13 @@ fun CalorieCalculatorTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: 
     } else {
         LightColorPalette
     }
-    MaterialTheme(
-        colorScheme = colors,
-        typography = Typography,
-        shapes = Shapes,
-        content = content
-    )
+
+    CompositionLocalProvider(LocalSpacing provides Dimensions()) {
+        MaterialTheme(
+            colorScheme = colors,
+            typography = Typography,
+            shapes = Shapes,
+            content = content
+        )
+    }
 }
