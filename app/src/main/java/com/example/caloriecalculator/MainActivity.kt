@@ -3,13 +3,23 @@ package com.example.caloriecalculator
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.caloriecalculator.navigation.navigate
 import com.example.caloriecalculator.ui.theme.CalorieCalculatorTheme
 import com.example.core.navigation.Route
+import com.example.onboarding_presentation.age.AgeScreen
 import com.example.onboarding_presentation.gender.GenderScreen
+import com.example.onboarding_presentation.height.HeightScreen
+import com.example.onboarding_presentation.weight.WeightScreen
 import com.example.onboarding_presentation.welcome.WelcomeScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,41 +30,60 @@ class MainActivity : ComponentActivity() {
         setContent {
             CalorieCalculatorTheme {
                 val navController = rememberNavController()
-                NavHost(
-                    navController = navController,
-                    startDestination = Route.WELCOME
-                ) {
-                    composable(Route.WELCOME) {
-                        WelcomeScreen(onNavigate = navController::navigate)
+                val snackBarHostState = remember { SnackbarHostState() }
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    snackbarHost = {
+                        SnackbarHost(snackBarHostState)
                     }
-                    composable(Route.AGE) {
+                ) { padding ->
+                    NavHost(
+                        navController = navController,
+                        startDestination = Route.WELCOME,
+                        modifier = Modifier.padding(padding)
+                    ) {
+                        composable(Route.WELCOME) {
+                            WelcomeScreen(onNavigate = navController::navigate)
+                        }
+                        composable(Route.AGE) {
+                            AgeScreen(
+                                snackBarHostState = snackBarHostState,
+                                onNavigate = navController::navigate
+                            )
+                        }
+                        composable(Route.GENDER) {
+                            GenderScreen(onNavigate = navController::navigate)
+                        }
+                        composable(Route.HEIGHT) {
+                            HeightScreen(
+                                snackBarHostState = snackBarHostState,
+                                onNavigate = navController::navigate
+                            )
+                        }
+                        composable(Route.WEIGHT) {
+                            WeightScreen(
+                                snackBarHostState = snackBarHostState,
+                                onNavigate = navController::navigate
+                            )
+                        }
+                        composable(Route.NUTRIENT_GOAL) {
 
-                    }
-                    composable(Route.GENDER) {
-                        GenderScreen(onNavigate = navController::navigate)
-                    }
-                    composable(Route.HEIGHT) {
+                        }
+                        composable(Route.ACTIVITY) {
 
-                    }
-                    composable(Route.WEIGHT) {
+                        }
+                        composable(Route.GOAL) {
 
-                    }
-                    composable(Route.NUTRIENT_GOAL) {
+                        }
+                        composable(Route.TRACKER_OVERVIEW) {
 
-                    }
-                    composable(Route.ACTIVITY) {
+                        }
+                        composable(Route.SEARCH) {
 
-                    }
-                    composable(Route.GOAL) {
-
-                    }
-                    composable(Route.TRACKER_OVERVIEW) {
-
-                    }
-                    composable(Route.SEARCH) {
-
+                        }
                     }
                 }
+
             }
         }
     }
