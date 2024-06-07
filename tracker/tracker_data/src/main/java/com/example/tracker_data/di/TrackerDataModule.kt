@@ -6,6 +6,8 @@ import com.example.tracker_data.local.LocalDbConstants
 import com.example.tracker_data.local.TrackerDao
 import com.example.tracker_data.local.TrackerDatabase
 import com.example.tracker_data.remote.OpenFoodApi
+import com.example.tracker_data.repository.TrackerRepositoryImpl
+import com.example.tracker_domain.repository.TrackerRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -58,5 +60,17 @@ object TrackerDataModule {
     @Singleton
     fun provideTrackerDao(database: TrackerDatabase): TrackerDao {
         return database.trackedDao
+    }
+
+    @Provides
+    @Singleton
+    fun provideTrackerRepository(
+        api: OpenFoodApi,
+        db: TrackerDatabase
+    ): TrackerRepository {
+        return TrackerRepositoryImpl(
+            dao = db.trackedDao,
+            api = api
+        )
     }
 }
