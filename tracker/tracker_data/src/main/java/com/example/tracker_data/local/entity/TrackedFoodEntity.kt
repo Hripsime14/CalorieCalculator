@@ -2,8 +2,9 @@ package com.example.tracker_data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.tracker_data.local.LocalDbConstants
 
-@Entity
+@Entity(tableName = LocalDbConstants.CALORIE_TABLE_NAME)
 data class TrackedFoodEntity(
     val name: String,
     val carbs: Int,

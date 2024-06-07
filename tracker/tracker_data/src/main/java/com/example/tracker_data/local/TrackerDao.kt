@@ -20,7 +20,7 @@ interface TrackerDao {
     @Query(
         """
             SELECT *
-            FROM trackedfoodentity
+            FROM ${LocalDbConstants.CALORIE_TABLE_NAME}
             WHERE dayOfMonth = :day AND month = :month AND year = :year
         """
     )

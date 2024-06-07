@@ -6,7 +6,7 @@ import com.example.tracker_data.local.entity.TrackedFoodEntity
 
 @Database(
     entities = [TrackedFoodEntity::class],
-    version = 1,
+    version = 2
 )
 abstract class TrackerDatabase: RoomDatabase() {
     abstract val trackedDao: TrackerDao
