@@ -1,6 +1,7 @@
 package com.example.core.data.preferences
 
 import android.content.SharedPreferences
+import android.preference.Preference
 import com.example.core.domain.model.ActivityLevel
 import com.example.core.domain.model.Gender
 import com.example.core.domain.model.GoalType
@@ -86,6 +87,16 @@ class DefaultPreferences(
             proteinRatio = carbProtein,
             fatRatio = carbFat
         )
+    }
+
+    override fun saveShouldShowOnboarding(shouldShow: Boolean) {
+        sharedPref.edit()
+            .putBoolean(Preferences.KEY_SHOULD_SHOW_ONBOARDING, shouldShow)
+            .apply()
+    }
+
+    override fun loadShouldShowOnboarding(): Boolean {
+        return sharedPref.getBoolean(Preferences.KEY_SHOULD_SHOW_ONBOARDING, true)
     }
 
 }
