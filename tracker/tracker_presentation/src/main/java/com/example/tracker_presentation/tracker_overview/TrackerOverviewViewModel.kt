@@ -43,7 +43,7 @@ class TrackerOverviewViewModel @Inject constructor(
                         _uiEvent.send(
                             UiEvent.Navigate(
                                 route = Route.SEARCH
-                                        + "/${event.meal.name}"
+                                        + "/${event.meal.mealType.name}"
                                         + "/${state.date.dayOfMonth}"
                                         + "/${state.date.month}"
                                         + "/${state.date.year}"
@@ -79,6 +79,7 @@ class TrackerOverviewViewModel @Inject constructor(
                         }
                     )
                 }
+                else -> Unit
             }
     }
 
