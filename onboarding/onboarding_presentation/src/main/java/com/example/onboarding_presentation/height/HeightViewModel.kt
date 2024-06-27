@@ -9,7 +9,6 @@ import com.example.core.domain.preferences.Preferences
 import com.example.core.domain.use_case.FilterOutDigits
 import com.example.core.util.UiEvent
 import com.example.core.R
-import com.example.core.navigation.Route
 import com.example.core.util.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -46,7 +45,7 @@ class HeightViewModel @Inject constructor(
                 return@launch
             }
             preferences.saveHeight(height)
-            _uiEvent.send(UiEvent.Navigate(Route.WEIGHT))
+            _uiEvent.send(UiEvent.Success)
         }
     }
 }

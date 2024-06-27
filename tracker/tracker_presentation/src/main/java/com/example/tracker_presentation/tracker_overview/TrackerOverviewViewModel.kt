@@ -12,7 +12,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import com.example.core.navigation.Route
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -39,19 +38,6 @@ class TrackerOverviewViewModel @Inject constructor(
 
         fun onEvent(event: TrackerOverviewEvent) {
             when (event) {
-                is TrackerOverviewEvent.OnAddFoodClick -> {
-                    viewModelScope.launch {
-                        _uiEvent.send(
-                            UiEvent.Navigate(
-                                route = Route.SEARCH
-                                        + "/${event.meal.mealType.name}"
-                                        + "/${state.date.dayOfMonth}"
-                                        + "/${state.date.month}"
-                                        + "/${state.date.year}"
-                            )
-                        )
-                    }
-                }
                 is TrackerOverviewEvent.OnDeleteTrackedFoodClick -> {
                     viewModelScope.launch {
                         trackedUseCases.deleteTrackedFood.invoke(trackedFood = event.trackedFood)

@@ -15,10 +15,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.caloriecalculator.navigation.navigate
 import com.example.caloriecalculator.ui.theme.CalorieCalculatorTheme
 import com.example.core.domain.preferences.Preferences
-import com.example.core.navigation.Route
+import com.example.caloriecalculator.navigation.Route
 import com.example.onboarding_presentation.activity.ActivityScreen
 import com.example.onboarding_presentation.age.AgeScreen
 import com.example.onboarding_presentation.gender.GenderScreen
@@ -57,45 +56,61 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(padding)
                     ) {
                         composable(Route.WELCOME) {
-                            WelcomeScreen(onNavigate = navController::navigate)
+                            WelcomeScreen(onNextClick = {
+                                navController.navigate(Route.GENDER)
+                            })
                         }
                         composable(Route.AGE) {
                             AgeScreen(
                                 snackBarHostState = snackBarHostState,
-                                onNavigate = navController::navigate
+                                onNextClick = {
+                                    navController.navigate(Route.HEIGHT)
+                                }
                             )
                         }
                         composable(Route.GENDER) {
                             GenderScreen(
-                                onNavigate = navController::navigate
+                                onNextClick = {
+                                    navController.navigate(Route.AGE)
+                                }
                             )
                         }
                         composable(Route.HEIGHT) {
                             HeightScreen(
                                 snackBarHostState = snackBarHostState,
-                                onNavigate = navController::navigate
+                                onNextClick = {
+                                    navController.navigate(Route.WEIGHT)
+                                }
                             )
                         }
                         composable(Route.WEIGHT) {
                             WeightScreen(
                                 snackBarHostState = snackBarHostState,
-                                onNavigate = navController::navigate
+                                onNextClick = {
+                                    navController.navigate(Route.ACTIVITY)
+                                }
                             )
                         }
                         composable(Route.NUTRIENT_GOAL) {
                             NutrientGoalScreen(
-                                onNavigate = navController::navigate,
+                                onNextClick = {
+                                    navController.navigate(Route.TRACKER_OVERVIEW)
+                                },
                                 snackBarHostState = snackBarHostState
                             )
                         }
                         composable(Route.ACTIVITY) {
                             ActivityScreen(
-                                onNavigate = navController::navigate
+                                onNextClick = {
+                                    navController.navigate(Route.GOAL)
+                                }
                             )
                         }
                         composable(Route.GOAL) {
                             GoalScreen(
-                                onNavigate = navController::navigate
+                                onNextClick = {
+                                    navController.navigate(Route.NUTRIENT_GOAL)
+                                }
                             )
                         }
                         composable(Route.TRACKER_OVERVIEW) {
